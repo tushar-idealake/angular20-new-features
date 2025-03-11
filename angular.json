@@ -20,9 +20,7 @@
             "outputPath": "dist/exponential-on-template-demo",
             "index": "projects/exponential-on-template-demo/src/index.html",
             "browser": "projects/exponential-on-template-demo/src/main.ts",
-            "polyfills": [
-              "zone.js"
-            ],
+            "polyfills": [],
             "tsConfig": "projects/exponential-on-template-demo/tsconfig.app.json",
             "inlineStyleLanguage": "scss",
             "assets": [
@@ -78,10 +76,7 @@
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
-            "polyfills": [
-              "zone.js",
-              "zone.js/testing"
-            ],
+            "polyfills": [],
             "tsConfig": "projects/exponential-on-template-demo/tsconfig.spec.json",
             "inlineStyleLanguage": "scss",
             "assets": [

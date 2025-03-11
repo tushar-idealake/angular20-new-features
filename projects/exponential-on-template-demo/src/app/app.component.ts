@@ -1,13 +1,17 @@
-import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { ChangeDetectionStrategy, Component, VERSION } from '@angular/core';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet],
-  templateUrl: './app.component.html',
-  styleUrl: './app.component.scss'
+  imports: [],
+  template: `
+    <div>
+      <h2>{{ version }} - Exponential operator on template</h2>
+      <p>Use ** operator on the template</p>
+    </div>
+  `,
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AppComponent {
-  title = 'exponentialOnTemplateDemo';
+  version = VERSION.full;
 }

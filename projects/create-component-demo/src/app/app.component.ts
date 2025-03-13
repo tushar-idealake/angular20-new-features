@@ -1,6 +1,7 @@
 import { NgTemplateOutlet } from '@angular/common';
-import { ChangeDetectionStrategy, Component, ComponentRef, inputBinding, signal, VERSION, viewChild, ViewContainerRef } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ComponentRef, inputBinding, outputBinding, signal, VERSION, viewChild, ViewContainerRef } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { AppLabelColorDirective } from './star-war/star-war-label.directive';
 
 @Component({
   selector: 'app-root',
@@ -74,7 +75,16 @@ export class AppComponent {
       {
         bindings: [
           inputBinding('id', () => id),
-          inputBinding('isSith', () => isSith)
+          inputBinding('isSith', () => isSith),
+          outputBinding<string>('alertStarWars', (name) => alert(`${name} alerts the parent component`)),
+        ],
+        directives: [
+          {
+            type: AppLabelColorDirective,
+            bindings: [
+              inputBinding('spanClass', () => isSith ? 'red' : 'blue')
+            ]
+          }
         ]
       }
     );

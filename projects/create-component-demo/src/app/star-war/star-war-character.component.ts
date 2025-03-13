@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, input, output } from '@angular/core';
 import { getPerson } from './star-war.api';
 import { toObservable, toSignal } from '@angular/core/rxjs-interop';
 import { switchMap } from 'rxjs';
@@ -9,17 +9,18 @@ import { switchMap } from 'rxjs';
   template: `
     <div class="border">
       @if(person(); as person) {
-        <p>Id: {{ id() }} </p>
+        <p><span>Id:</span> {{ id() }} </p>
         @if (isSith()) {
           <p>A Sith, he is evil.</p>
-        }
-        <p>Name: {{ person.name }}</p>
-        <p>Height: {{ person.height }}</p>
-        <p>Mass: {{ person.mass }}</p>
-        <p>Hair Color: {{ person.hair_color }}</p>
-        <p>Skin Color: {{ person.skin_color }}</p>
-        <p>Eye Color: {{ person.eye_color }}</p>
-        <p>Gender: {{ person.gender }}</p>
+        }         
+        <p><span>Name: </span>{{ person.name }}</p>
+        <p><span>Height: </span>{{ person.height }}</p>
+        <p><span>Mass:</span> {{ person.mass }}</p>
+        <p><span>Hair Color:</span> {{ person.hair_color }}</p>
+        <p><span>Skin Color:</span> {{ person.skin_color }}</p>
+        <p><span>Eye Color:</span> {{ person.eye_color }}</p>
+        <p><span>Gender:</span> {{ person.gender }}</p>
+        <button (click)="alertStarWars.emit(person.name)">Alert parent</button>
       } @else {
         <p>No info</p>
       }
@@ -44,6 +45,8 @@ import { switchMap } from 'rxjs';
 export class AppStarWarCharacterComponent {  
   id = input(1);
   isSith = input(false);
+
+  alertStarWars = output<string>();
 
   getPersonFn = getPerson();
 

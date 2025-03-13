@@ -200,9 +200,7 @@
             "outputPath": "dist/create-component-demo",
             "index": "projects/create-component-demo/src/index.html",
             "browser": "projects/create-component-demo/src/main.ts",
-            "polyfills": [
-              "zone.js"
-            ],
+            "polyfills": [],
             "tsConfig": "projects/create-component-demo/tsconfig.app.json",
             "inlineStyleLanguage": "scss",
             "assets": [
@@ -258,10 +256,7 @@
         "test": {
           "builder": "@angular/build:karma",
           "options": {
-            "polyfills": [
-              "zone.js",
-              "zone.js/testing"
-            ],
+            "polyfills": [],
             "tsConfig": "projects/create-component-demo/tsconfig.spec.json",
             "inlineStyleLanguage": "scss",
             "assets": [

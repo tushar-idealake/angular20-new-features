@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, input, signal, VERSION } from '@angular/core';
+import { ChangeDetectionStrategy, Component, signal, VERSION } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
 @Component({

@@ -1,5 +1,5 @@
 import { NgTemplateOutlet } from '@angular/common';
-import { ChangeDetectionStrategy, Component, ComponentRef, signal, VERSION, viewChild, ViewContainerRef } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ComponentRef, inputBinding, signal, VERSION, viewChild, ViewContainerRef } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
 @Component({
@@ -70,10 +70,14 @@ export class AppComponent {
 
   async addAJedi(id: number, isSith = false) {
     const { AppStarWarCharacterComponent } = await import ('./star-war/star-war-character.component');
-    AppStarWarCharacterComponent
-    const componentRef = this.vcr().createComponent(AppStarWarCharacterComponent);
-    componentRef.setInput('id', id);
-    componentRef.setInput('isSith', isSith);
+    const componentRef = this.vcr().createComponent(AppStarWarCharacterComponent, 
+      {
+        bindings: [
+          inputBinding('id', () => id),
+          inputBinding('isSith', () => isSith)
+        ]
+      }
+    );
     this.componentRefs.push(componentRef);
   }
 

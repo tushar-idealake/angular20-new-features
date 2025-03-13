@@ -1,9 +1,10 @@
+import { NgTemplateOutlet } from '@angular/common';
 import { ChangeDetectionStrategy, Component, ComponentRef, signal, VERSION, viewChild, ViewContainerRef } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-root',
-  imports: [FormsModule],
+  imports: [FormsModule, NgTemplateOutlet],
   template: `
     <h1>{{ version }} - {{ name }}!</h1>
     <h2>PR:</h2>
@@ -13,24 +14,24 @@ import { FormsModule } from '@angular/forms';
     <div class="container">
       <ng-container #vcr />
     </div>
-    <select [(ngModel)]="jediId">
-      <option value="1">Luke</option>
-      <option value="10">Obi Wan Kenobe</option>
-      <option value="20">Yoda</option>
-      <option value="51">Mace Windu</option>
-      <option value="52">Ki-Adi-Mundi</option>
-      <option value="53">Kit Fisto</option>
-      <option value="32">Qui-Gon Jinn</option>
-    </select>
-    <button (click)="addAJedi(jediId())">Add a Jedi</button>
 
-    <select [(ngModel)]="sithId">
-      <option value="4">Darth Vader</option>
-      <option value="44">Darth Maul</option>
-      <option value="21">Palpatine</option>
-      <option value="67">Dooku</option>
-    </select>
-    <button (click)="addAJedi(sithId(), true)">Add a Sith</button>
+    <ng-container [ngTemplateOutlet]="starwars" 
+      [ngTemplateOutletContext]="{ items: jediFighters(), isSith: false  }" />
+    
+    <ng-container [ngTemplateOutlet]="starwars"
+      [ngTemplateOutletContext]="{ items: sithFighters(), isSith: true }"
+    />
+
+    <ng-template let-items="items" let-isSith="isSith"
+      #starwars>
+      <select [ngModel]="items[0].id" #id="ngModel">
+        @for (item of items; track item.id) {
+          <option [ngValue]="item.id">{{ item.name }}</option>
+        }
+      </select>
+      @let text = isSith ? 'Add a Sith' : 'Add a Jedi';
+      <button (click)="addAJedi(id.value, isSith)">{{ text }}</button>
+    </ng-template>
   `,
   styles: `
     .container {
@@ -49,6 +50,23 @@ export class AppComponent {
 
   jediId = signal(1);
   sithId = signal(4);
+
+  jediFighters = signal([
+    { id: 1, name: 'Luke' },
+    { id: 10, name: 'Obi Wan Kenobe' },
+    { id: 20, name: 'Yoda' },
+    { id: 51, name: 'Mace Windu' },
+    { id: 52, name: 'Ki-Adi-Mundi' },
+    { id: 53, name: 'Kit Fisto' },
+    { id: 32, name: 'Qui-Gon Jinn' },
+  ]);
+
+  sithFighters = signal([
+    { id: 4, name: 'Darth Vader' },
+    { id: 44, name: 'Darth Maul' },
+    { id: 21, name: 'Palpatine' },
+    { id: 67, name: 'Dooku' },
+  ]);
 
   async addAJedi(id: number, isSith = false) {
     const { AppStarWarCharacterComponent } = await import ('./star-war/star-war-character.component');

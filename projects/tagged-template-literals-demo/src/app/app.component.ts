@@ -1,12 +1,21 @@
-import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { ChangeDetectionStrategy, Component, input, signal, VERSION } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet],
+  imports: [FormsModule],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.scss'
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AppComponent {
-  title = 'taggedTemplateLiteralsDemo';
+  version = VERSION.full;
+  description = 'Tagged Template Literals Demo';
+
+  name = signal('Mary');
+  greeting = signal('morning');
+
+  greet(strings: TemplateStringsArray, name: string, greeting: string) {
+    console.log(strings);
+    return `${strings[0]} ${name}${strings[1]} ${greeting}${strings[2]}`;
+  }
 }

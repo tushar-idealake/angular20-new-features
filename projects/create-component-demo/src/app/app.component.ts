@@ -10,7 +10,9 @@ import { AppLabelColorDirective } from './star-war/star-war-label.directive';
     <h1>{{ version }} - {{ name }}!</h1>
     <h2>PR:</h2>
     <ol style="margin-bottom: 1rem;">
-      <li>https://github.com/angular/angular/pull/59947</li>
+      <li><a href="https://github.com/angular/angular/pull/60137" target="_blank">
+        https://github.com/angular/angular/pull/60137
+      </a></li>
     </ol>
     <div class="container">
       <ng-container #vcr />

@@ -11,8 +11,11 @@ import { ChangeDetectionStrategy, Component, VERSION } from '@angular/core';
       <div>
           <p>PRs:</p>
           <ol style="margin-bottom: 1rem;">
-            <li>https://github.com/angular/angular/pull/59894</li>
-            <li>https://github.com/angular/angular/pull/60101</li>
+            <li><a href="https://github.com/angular/angular/pull/59894" 
+              target="_blank">https://github.com/angular/angular/pull/59894</a></li>
+            <li><a href="https://github.com/angular/angular/pull/60101" target="_blank">
+              https://github.com/angular/angular/pull/60101
+            </a></li>
           </ol>
 
           <div class="row">

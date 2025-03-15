@@ -17,7 +17,10 @@
         "build": {
           "builder": "@angular-devkit/build-angular:application",
           "options": {
-            "outputPath": "dist/exponential-on-template-demo",
+            "outputPath": {
+              "base": "dist/exponential-on-template-demo",
+              "browser": ""
+            },
             "index": "projects/exponential-on-template-demo/src/index.html",
             "browser": "projects/exponential-on-template-demo/src/main.ts",
             "polyfills": [],
@@ -48,7 +51,8 @@
                   "maximumError": "8kB"
                 }
               ],
-              "outputHashing": "all"
+              "outputHashing": "all",
+              "baseHref": "https://railsstudent.github.io/angular20-new-features/exponential-on-template-demo/"
             },
             "development": {
               "optimization": false,
@@ -107,7 +111,10 @@
         "build": {
           "builder": "@angular/build:application",
           "options": {
-            "outputPath": "dist/tagged-template-literals-demo",
+            "outputPath": {
+              "base": "dist/tagged-template-literals-demo",
+              "browser": ""
+            },
             "index": "projects/tagged-template-literals-demo/src/index.html",
             "browser": "projects/tagged-template-literals-demo/src/main.ts",
             "polyfills": [],
@@ -138,7 +145,8 @@
                   "maximumError": "8kB"
                 }
               ],
-              "outputHashing": "all"
+              "outputHashing": "all",
+              "baseHref": "https://railsstudent.github.io/angular20-new-features/tagged-template-literals-demo/"
             },
             "development": {
               "optimization": false,
@@ -197,7 +205,10 @@
         "build": {
           "builder": "@angular/build:application",
           "options": {
-            "outputPath": "dist/create-component-demo",
+            "outputPath": {
+              "base": "dist/create-component-demo",
+              "browser": ""
+            },
             "index": "projects/create-component-demo/src/index.html",
             "browser": "projects/create-component-demo/src/main.ts",
             "polyfills": [],
@@ -228,7 +239,8 @@
                   "maximumError": "8kB"
                 }
               ],
-              "outputHashing": "all"
+              "outputHashing": "all",
+              "baseHref": "https://railsstudent.github.io/angular20-new-features/create-component-demo/"
             },
             "development": {
               "optimization": false,

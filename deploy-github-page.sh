@@ -12,8 +12,8 @@ fi
 
 token_dir=$(tokenize_and_join "$1")
 
-echo "delete dist/$1"
-rm -rf dist/$1
+echo "delete dist/$token_dir"
+rm -rf dist/$token_dir
 echo "build project $1 starts"
 ng build --project=$1
 cp ./dist/$token_dir/index.html  ./dist/$token_dir/404.html

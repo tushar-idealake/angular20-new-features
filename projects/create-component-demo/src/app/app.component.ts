@@ -84,7 +84,7 @@ export class AppComponent {
           {
             type: AppLabelColorDirective,
             bindings: [
-              inputBinding('spanClass', () => isSith ? 'red' : 'blue')
+              inputBinding('spanClass', () => isSith ? 'red' : 'rebeccapurple')
             ]
           }
         ]

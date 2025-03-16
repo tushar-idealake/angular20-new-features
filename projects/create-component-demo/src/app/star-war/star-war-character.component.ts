@@ -9,7 +9,7 @@ import { switchMap } from 'rxjs';
   template: `
     <div class="border">
       @if(person(); as person) {
-        <p><span>Id:</span> {{ id() }} </p>
+        <p><span>Id:</span> {{ person.id }} </p>
         @if (isSith()) {
           <p>A Sith, he is evil.</p>
         }         

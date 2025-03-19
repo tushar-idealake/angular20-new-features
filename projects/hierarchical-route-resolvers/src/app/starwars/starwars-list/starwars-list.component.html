@@ -1,0 +1,22 @@
+<p>starwars-list works!</p>
+{{ fighterIds().ids | json }}
+<div>
+    <h3 style="font-style: italic; text-decoration: underline; margin-bottom: 0.5rem;">Fighters</h3>
+    @if (charactersResource.isLoading()) {
+        <p>Loading characters...</p>
+    } @else if (charactersResource.error()) {
+        <p>Error: {{ charactersResource.error() }}</p>
+    } @else {
+        @if (charactersResource.hasValue()) {
+            @let characters = charactersResource.value();
+            @for (c of characters; track c.id) {
+                <div style="border: 1px solid black; border-radius: 0.25rem; margin-bottom: 1rem; padding: 0.75rem;">
+                    <p>id: {{ c.id }}</p>
+                    <p>Name: {{ c.name }}</p>
+                    <p>Gender: {{ c.gender }}</p>
+                </div>
+            }
+        }
+    }
+
+</div>

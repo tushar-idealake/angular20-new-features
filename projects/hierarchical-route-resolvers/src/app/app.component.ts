@@ -36,8 +36,8 @@ export class AppComponent {
   alligance = signal('jedi');
   fighterIds = computed(() => {
     if (this.alligance() == 'jedi') {
-      return { ids: [1, 10, 20, 51, 52, 53, 32] };
+      return { ids: [1, 10, 20, 51, 52, 53, 32], isSith: false };
     }
-    return { ids: [4,44, 21, 67] };
+    return { ids: [4,44, 21, 67], isSith: true };
   })
 }

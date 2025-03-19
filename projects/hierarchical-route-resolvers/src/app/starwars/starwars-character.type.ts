@@ -4,7 +4,6 @@ export type RawStarWarsCharacter = {
 	skin_color: string;
 	eye_color: string;
     films: string[];
-    starships: string[];
     gender: string;
 }
 
@@ -15,6 +14,7 @@ export type StarWarsCharacter = {
 	skinColor: string;
 	eyeColor: string;
     films: string[];
-    starships: string[];
     gender: string;
 }
+
+export type StarWarsCharacterNature = StarWarsCharacter & { isSith: boolean };

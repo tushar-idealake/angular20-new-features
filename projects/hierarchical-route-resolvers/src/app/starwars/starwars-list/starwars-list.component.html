@@ -1,12 +1,11 @@
-<p>starwars-list works!</p>
-{{ fighterIds().ids | json }}
 <div>
-    <h3 style="font-style: italic; text-decoration: underline; margin-bottom: 0.5rem;">Fighters</h3>
+    <h3 class="fighters">Fighters</h3>
     @if (charactersResource.isLoading()) {
         <p>Loading characters...</p>
     } @else if (charactersResource.error()) {
         <p>Error: {{ charactersResource.error() }}</p>
     } @else {
+        <router-outlet [routerOutletData]="selectedFighter()" />
         @if (charactersResource.hasValue()) {
             @let characters = charactersResource.value();
             @for (c of characters; track c.id) {
@@ -14,6 +13,7 @@
                     <p>id: {{ c.id }}</p>
                     <p>Name: {{ c.name }}</p>
                     <p>Gender: {{ c.gender }}</p>
+                    <a [routerLink]="['fighters', c.id]" (click)="selectFighter(c)">See details</a>
                 </div>
             }
         }

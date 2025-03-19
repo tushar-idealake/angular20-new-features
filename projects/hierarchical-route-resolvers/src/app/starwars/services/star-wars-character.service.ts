@@ -6,12 +6,12 @@ import { catchError, forkJoin, map, of } from 'rxjs';
 function toStarWarsCharacterMapper(id: number, fromData: RawStarWarsCharacter) {
   return {
     id,
+    gender: fromData.gender,
     eyeColor: fromData.eye_color,
     hairColor: fromData.hair_color,
     skinColor: fromData.skin_color,
     name: fromData.name,
     films: fromData.films,
-    starships: fromData.starships
   } as StarWarsCharacter
 }
 

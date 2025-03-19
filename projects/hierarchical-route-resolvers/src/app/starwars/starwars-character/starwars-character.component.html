@@ -1,1 +1,12 @@
-<p>starwars-character works!</p>
+<p>{{ fighter() | json }}</p>
+<div>
+    @let f = fighter();
+    @if (f) {
+        <p>Id: {{ f.id }}</p>
+        <p>Name: {{ f.name }}</p>
+        <p>Is Sith? {{ f.isSith }}</p>
+        <p>Eye Color: {{ f.eyeColor }}</p>
+        <p>Hair Color: {{ f.hairColor }}</p>
+        <p>Skin Color: {{ f.skinColor }}</p>
+    }
+</div>

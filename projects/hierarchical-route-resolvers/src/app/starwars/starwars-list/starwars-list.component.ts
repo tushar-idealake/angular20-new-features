@@ -1,13 +1,30 @@
 import { ChangeDetectionStrategy, Component, inject, signal, Signal } from '@angular/core';
 import { rxResource } from '@angular/core/rxjs-interop';
-import { ROUTER_OUTLET_DATA, RouterLink, RouterOutlet } from '@angular/router';
+import { ROUTER_OUTLET_DATA, RouterOutlet } from '@angular/router';
+import { StarWarsCardComponent } from '../star-wars-card/star-wars-card.component';
 import { StarWarsCharacterService } from '../services/star-wars-character.service';
 import { StarWarsCharacter, StarWarsCharacterNature } from '../starwars-character.type';
 
 @Component({
   selector: 'app-starwars-list',
-  imports: [RouterLink, RouterOutlet],
-  templateUrl: './starwars-list.component.html',
+  imports: [StarWarsCardComponent, RouterOutlet],
+  template: `
+    <div>
+        <h3 class="fighters">Fighters</h3>
+        @if (charactersResource.isLoading()) {
+            <p>Loading characters...</p>
+        } @else if (charactersResource.error()) {
+            <p>Error: {{ charactersResource.error() }}</p>
+        } @else {
+          @if (charactersResource.hasValue()) {
+            @for (c of charactersResource.value(); track c.id) {
+                <app-star-wars-card [c]="c" />
+            }
+            <router-outlet />
+          }
+        }
+    </div>
+  `,
   styles: `
     .fighters {
       font-style: italic; 
@@ -23,10 +40,10 @@ export default class StarwarsListComponent {
   selectedFighter = signal<StarWarsCharacterNature | undefined>(undefined);
   
   charactersResource = rxResource({
-    request: () => this.fighterIds().ids,
+    request: () => this.fighterIds(),
     loader: ({ request }) => 
       this.starWarsCharacterService.retrieveCharacters(request),
-    defaultValue: [] as StarWarsCharacter[]
+    defaultValue: [] as StarWarsCharacterNature[]
   });
 
   selectFighter(character: StarWarsCharacter) {

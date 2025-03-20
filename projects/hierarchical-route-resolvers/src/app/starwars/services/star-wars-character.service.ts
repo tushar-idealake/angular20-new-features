@@ -1,18 +1,19 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
-import { RawStarWarsCharacter, StarWarsCharacter } from '../starwars-character.type';
 import { catchError, forkJoin, map, of } from 'rxjs';
+import { RawStarWarsCharacter, StarWarsCharacterNature } from '../starwars-character.type';
 
-function toStarWarsCharacterMapper(id: number, fromData: RawStarWarsCharacter) {
+function toStarWarsCharacterMapper(id: number, isSith: boolean, fromData: RawStarWarsCharacter) {
   return {
     id,
+    isSith,
     gender: fromData.gender,
     eyeColor: fromData.eye_color,
     hairColor: fromData.hair_color,
     skinColor: fromData.skin_color,
     name: fromData.name,
     films: fromData.films,
-  } as StarWarsCharacter
+  } as StarWarsCharacterNature
 }
 
 @Injectable({
@@ -21,16 +22,20 @@ function toStarWarsCharacterMapper(id: number, fromData: RawStarWarsCharacter) {
 export class StarWarsCharacterService {
   #httpClient = inject(HttpClient);
 
-  retrieveCharacters(ids: number[]) {
+  retrieveCharacter(id: number, isSith: boolean) {
+    return this.#httpClient.get<RawStarWarsCharacter>(`https://swapi.py4e.com/api/people/${id}`)
+      .pipe(
+        map((fromCharacter) => toStarWarsCharacterMapper(id, isSith, fromCharacter)),
+        catchError((e) => {
+          console.error(e);
+          return of(undefined)
+        })
+      )
+  }
+
+  retrieveCharacters({ ids, isSith }: { ids: number[], isSith: boolean }) {
     const starWarsCharacterObservables = ids.map((id) => 
-      this.#httpClient.get<RawStarWarsCharacter>(`https://swapi.py4e.com/api/people/${id}`)
-        .pipe(
-          map((fromCharacter) => toStarWarsCharacterMapper(id, fromCharacter)),
-          catchError((e) => {
-            console.error(e);
-            return of(undefined)
-          })
-        )
+      this.retrieveCharacter(id, isSith)
     ) 
       
     return forkJoin(starWarsCharacterObservables)

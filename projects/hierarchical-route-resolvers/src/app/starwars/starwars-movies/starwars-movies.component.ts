@@ -7,6 +7,6 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
   styleUrl: './starwars-movies.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class StarwarsMoviesComponent {
+export default class StarwarsMoviesComponent {
 
 }

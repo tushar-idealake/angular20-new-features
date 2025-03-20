@@ -1,15 +1,15 @@
 import { JsonPipe } from '@angular/common';
-import { ChangeDetectionStrategy, Component, inject, Signal } from '@angular/core';
-import { ROUTER_OUTLET_DATA } from '@angular/router';
+import { ChangeDetectionStrategy, Component, input, signal } from '@angular/core';
+import { RouterLink, RouterOutlet } from '@angular/router';
 import { StarWarsCharacterNature } from '../starwars-character.type';
 
 @Component({
   selector: 'app-starwars-character',
-  imports: [JsonPipe],
+  imports: [RouterLink, RouterOutlet],
   templateUrl: './starwars-character.component.html',
-  styleUrl: './starwars-character.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export default class StarwarsCharacterComponent {
-  fighter = inject(ROUTER_OUTLET_DATA) as Signal<StarWarsCharacterNature>;
+  showFilms = signal(false);
+  fighter = input<StarWarsCharacterNature | undefined>(undefined)
 }

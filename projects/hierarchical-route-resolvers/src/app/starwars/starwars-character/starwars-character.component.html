@@ -1,12 +1,18 @@
-<p>{{ fighter() | json }}</p>
 <div>
-    @let f = fighter();
-    @if (f) {
-        <p>Id: {{ f.id }}</p>
-        <p>Name: {{ f.name }}</p>
-        <p>Is Sith? {{ f.isSith }}</p>
-        <p>Eye Color: {{ f.eyeColor }}</p>
-        <p>Hair Color: {{ f.hairColor }}</p>
-        <p>Skin Color: {{ f.skinColor }}</p>
+    @if (fighter(); as f) {
+        <div style="display: flex; justify-content: space-between; flex-wrap: wrap; border: 1px solid black;">
+            <p>Name: {{ f.name }}</p>
+            <p>Gender: {{ f.gender }}</p>
+            <p>Is Sith? {{ f.isSith }}</p>
+            <p>Eye Color: {{ f.eyeColor }}</p>
+            <p>Hair Color: {{ f.hairColor }}</p>
+            <p>Skin Color: {{ f.skinColor }}</p>
+            @if (f.films.length > 0) {
+                <div style="margin-bottom: 1rem;">
+                    <a [routerLink]="['films']">Show Films</a>
+                </div>
+            }    
+        </div>
+        <router-outlet />    
     }
 </div>

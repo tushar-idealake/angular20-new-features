@@ -9,11 +9,10 @@ const starWarsListRoutes: Routes = [
             {
                 path: 'fighters/:id',
                 title: 'Star Wars Fighter',
-                loadComponent: () => import('../starwars-character/starwars-character.component'),
+                loadChildren: () => import ('./star-wars-character.routes'),
             }
         ] 
     }
 ];
 
 export default starWarsListRoutes;
-

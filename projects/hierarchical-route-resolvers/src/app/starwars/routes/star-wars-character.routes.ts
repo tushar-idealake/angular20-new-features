@@ -22,7 +22,6 @@ const starWarsCharacterRoutes: Routes = [
                 loadComponent: () => import('../starwars-movies/starwars-movies.component'),
                 resolve: {
                     urls: (route: ActivatedRouteSnapshot, state: RouterStateSnapshot) =>  {
-                        console.log(route);
                         console.log('figher', route.data['fighter']); // Why is it null?
                         return ''
                     }

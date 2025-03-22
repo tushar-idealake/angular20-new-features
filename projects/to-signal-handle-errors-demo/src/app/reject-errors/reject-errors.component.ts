@@ -1,23 +1,22 @@
-import { ChangeDetectionStrategy, Component, computed, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
-import { BehaviorSubject, catchError, EMPTY, map, scan } from 'rxjs';
+import { FormsModule } from '@angular/forms';
+import { BehaviorSubject, catchError, debounceTime, EMPTY, filter, map, scan } from 'rxjs';
 import { ERROR_TRACKING_TOKEN } from '../errors/error-token.constant';
-import { AsyncPipe } from '@angular/common';
 
 @Component({
   selector: 'app-reject-errors-example',
   standalone: true,
-  imports: [AsyncPipe],
+  imports: [FormsModule],
   template: `
     <h3>With rejectErrors option removed, toSignal catches the uncaught exception and handles it explicitly.</h3>
     <p>The observable's catchError operator returns EMPTY to complete the observable.</p>
-    <p>Subsequent button clicks shows the last successful value, 4.</p>
+    <p>Subsequent input to the textbox has no effect.</p>
     <div>
-      <p>total: {{ total() }}</p>
-      <p>Number errors caught: {{ numErrors$ | async }}</p>
+      <p>Hint: {{ hint() }}</p>
     </div>
-    <button (click)="something.next(1)">Add</button>
-    <button (click)="something.next(-1)">Subtract</button>
+    Your guess: <input type="number" [ngModel]="something.getValue()" 
+      (ngModelChange)="something.next($event)"/>
   `,
   styles: `
     button {
@@ -29,24 +28,54 @@ import { AsyncPipe } from '@angular/common';
 })
 export default class RejectErrorsComponent {
   #errorTracking = inject(ERROR_TRACKING_TOKEN);
+  numErrors = toSignal(this.#errorTracking.getErrorCount$, { initialValue: 0 });
 
-  something = new BehaviorSubject(0);
-  numErrors$ = this.#errorTracking.getErrorCount$;
+  something = new BehaviorSubject(1);
+  debounce$ = this.something.pipe(debounceTime(300));
 
-  #total$ = this.something.pipe(
-    scan((acc, v) => acc + v, 0),
-    map((v) => {
-      if (v === 5) {
-        throw new Error('throw a rejectErrors error');
+  myGuess = 5;
+
+  #hint$ = this.debounce$.pipe(
+    filter((v) => Math.floor(v) === v),
+    filter((v) => v >= 1 && v <= 100),
+    scan((acc, v) => {
+      if (v < acc.left || v > acc.right) {
+        return acc;
       }
-      return v;
+
+      if (v < this.myGuess) {
+        return {
+          left: v,
+          right: acc.right,
+          guess: v
+        };
+      } else if (v > this.myGuess) {
+        return {
+          left: acc.left,
+          right: v,
+          guess: v
+        };
+      }
+
+      return { ...acc, guess: v };
+    }, { left: 1, right: 100, guess: -1 }),
+    map(({ left, right, guess }) => {
+      if (guess === this.myGuess) {
+        throw new Error(
+          'Error is thrown and the global error handler handles it'
+        );
+      }
+      return `Guess an integer between ${left} and ${right}`;
     }),
     catchError((e) => {
       console.error(e);
       this.#errorTracking.addNumErrors();
+      alert(`Number of error caught: ${this.numErrors()}`);
       return EMPTY;
     })
   );
 
-  total = toSignal(this.#total$, { initialValue: 0 });
+  hint = toSignal(this.#hint$, {
+    initialValue: 'Guess an integer between 1 and 100'
+  });
 }

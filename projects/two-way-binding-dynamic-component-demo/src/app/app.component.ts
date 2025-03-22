@@ -76,8 +76,8 @@ export class AppComponent {
   lastClicked = signal('');
 
   async addAJedi(id: number, isSith = false) {
-    const { AppStarWarCharacterComponent } = await import ('./star-wars/star-wars-character.component');
-    const componentRef = this.vcr().createComponent(AppStarWarCharacterComponent, 
+    const { AppStarWarsCharacterComponent } = await import ('./star-wars/star-wars-character.component');
+    const componentRef = this.vcr().createComponent(AppStarWarsCharacterComponent, 
       {
         bindings: [
           inputBinding('id', () => id),

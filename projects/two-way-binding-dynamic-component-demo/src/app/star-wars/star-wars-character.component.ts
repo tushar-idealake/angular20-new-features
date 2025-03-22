@@ -44,7 +44,7 @@ import { switchMap } from 'rxjs';
   },
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class AppStarWarCharacterComponent {  
+export class AppStarWarsCharacterComponent {  
   id = input(1);
   isSith = input(false);
   lastClicked = model('')

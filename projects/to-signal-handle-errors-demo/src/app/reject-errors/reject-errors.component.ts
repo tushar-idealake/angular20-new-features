@@ -3,6 +3,7 @@ import { toSignal } from '@angular/core/rxjs-interop';
 import { FormsModule } from '@angular/forms';
 import { BehaviorSubject, catchError, debounceTime, EMPTY, filter, map, scan } from 'rxjs';
 import { ERROR_TRACKING_TOKEN } from '../errors/error-token.constant';
+import { ErrorTrackingImpl } from '../errors/error-tracking.service';
 
 @Component({
   selector: 'app-reject-errors-example',
@@ -24,6 +25,12 @@ import { ERROR_TRACKING_TOKEN } from '../errors/error-token.constant';
       padding: 0.5rem;
     }
   `,
+  providers:[
+    {
+      provide: ERROR_TRACKING_TOKEN,
+      useClass: ErrorTrackingImpl,
+    },
+  ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export default class RejectErrorsComponent {

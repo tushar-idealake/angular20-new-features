@@ -73,7 +73,7 @@ export class AppComponent {
     { id: 67, name: 'Dooku' },
   ]);
 
-  lastClicked = signal('')
+  lastClicked = signal('');
 
   async addAJedi(id: number, isSith = false) {
     const { AppStarWarCharacterComponent } = await import ('./star-wars/star-wars-character.component');

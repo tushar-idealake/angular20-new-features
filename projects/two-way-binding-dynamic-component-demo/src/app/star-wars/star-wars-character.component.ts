@@ -1,11 +1,10 @@
-import { ChangeDetectionStrategy, Component, input, output } from '@angular/core';
-import { getPerson } from './star-war.api';
+import { ChangeDetectionStrategy, Component, input, model } from '@angular/core';
+import { getPerson } from './star-wars.api';
 import { toObservable, toSignal } from '@angular/core/rxjs-interop';
 import { switchMap } from 'rxjs';
 
 @Component({
-  selector: 'app-star-war-character',
-  imports: [],
+  selector: 'app-star-wars-character',
   template: `
     <div class="border">
       @if(person(); as person) {
@@ -20,7 +19,7 @@ import { switchMap } from 'rxjs';
         <p><span>Skin Color:</span> {{ person.skin_color }}</p>
         <p><span>Eye Color:</span> {{ person.eye_color }}</p>
         <p><span>Gender:</span> {{ person.gender }}</p>
-        <button (click)="alertStarWars.emit(person.name)">Alert parent</button>
+        <button (click)="voted()">Voted for {{ person.name }}</button>
       } @else {
         <p>No info</p>
       }
@@ -40,19 +39,25 @@ import { switchMap } from 'rxjs';
       margin-bottom: 1rem;
     }
   `,
+  host: {
+    '[class]': "'rebeccapurple'"
+  },
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AppStarWarCharacterComponent {  
   id = input(1);
   isSith = input(false);
+  lastClicked = model('')
 
-  alertStarWars = output<string>();
+  voted() {
+    const name = this.person()?.name || 'NA';
+    const currentTime = new Date(Date.now()).toISOString();
+    this.lastClicked.set(`You voted for ${name} at ${currentTime}`);
+  }
 
   getPersonFn = getPerson();
 
   person = toSignal(toObservable(this.id)
-    .pipe(
-      switchMap((id) => this.getPersonFn(id)),
-    )
+    .pipe(switchMap((id) => this.getPersonFn(id)))
   );
 }

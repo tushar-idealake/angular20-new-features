@@ -1,7 +1,7 @@
 import { catchError, map, Observable, of } from 'rxjs';
 import { inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Person, PersonWithoutId } from './star-war.type';
+import { Person, PersonWithoutId } from './star-wars.type';
 
 const URL = 'https://swapi.dev/api/people';
 

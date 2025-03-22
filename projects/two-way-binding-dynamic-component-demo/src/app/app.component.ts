@@ -1,7 +1,6 @@
 import { NgTemplateOutlet } from '@angular/common';
-import { ChangeDetectionStrategy, Component, ComponentRef, inputBinding, outputBinding, signal, VERSION, viewChild, ViewContainerRef } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ComponentRef, inputBinding, signal, twoWayBinding, VERSION, viewChild, ViewContainerRef } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { AppLabelColorDirective } from './star-war/star-war-label.directive';
 
 @Component({
   selector: 'app-root',
@@ -22,6 +21,10 @@ import { AppLabelColorDirective } from './star-war/star-war-label.directive';
     <ng-container [ngTemplateOutlet]="starwars"
       [ngTemplateOutletContext]="{ items: sithFighters(), isSith: true }"
     />
+
+    <div>
+      <span>Two-way Bindings: {{ lastClicked()}}</span>
+    </div>
 
     <ng-template let-items="items" let-isSith="isSith"
       #starwars>
@@ -70,23 +73,17 @@ export class AppComponent {
     { id: 67, name: 'Dooku' },
   ]);
 
+  lastClicked = signal('')
+
   async addAJedi(id: number, isSith = false) {
-    const { AppStarWarCharacterComponent } = await import ('./star-war/star-war-character.component');
+    const { AppStarWarCharacterComponent } = await import ('./star-wars/star-wars-character.component');
     const componentRef = this.vcr().createComponent(AppStarWarCharacterComponent, 
       {
         bindings: [
           inputBinding('id', () => id),
           inputBinding('isSith', () => isSith),
-          outputBinding<string>('alertStarWars', (name) => alert(`${name} alerts the parent component`)),
+          twoWayBinding('lastClicked', this.lastClicked),
         ],
-        directives: [
-          {
-            type: AppLabelColorDirective,
-            bindings: [
-              inputBinding('spanClass', () => isSith ? 'red' : 'rebeccapurple')
-            ]
-          }
-        ]
       }
     );
     this.componentRefs.push(componentRef);

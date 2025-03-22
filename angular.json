@@ -378,6 +378,105 @@
           }
         }
       }
+    },
+    "TwoWayBindingDynamicComponentDemo": {
+      "projectType": "application",
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "scss"
+        }
+      },
+      "root": "projects/two-way-binding-dynamic-component-demo",
+      "sourceRoot": "projects/two-way-binding-dynamic-component-demo/src",
+      "prefix": "app",
+      "architect": {
+        "build": {
+          "builder": "@angular/build:application",
+          "options": {
+            "outputPath": {
+              "base": "dist/two-way-binding-dynamic-component-demo",
+              "browser": ""
+            },
+            "index": "projects/two-way-binding-dynamic-component-demo/src/index.html",
+            "browser": "projects/two-way-binding-dynamic-component-demo/src/main.ts",
+            "polyfills": [
+              "zone.js"
+            ],
+            "tsConfig": "projects/two-way-binding-dynamic-component-demo/tsconfig.app.json",
+            "inlineStyleLanguage": "scss",
+            "assets": [
+              {
+                "glob": "**/*",
+                "input": "projects/two-way-binding-dynamic-component-demo/public"
+              }
+            ],
+            "styles": [
+              "projects/two-way-binding-dynamic-component-demo/src/styles.scss"
+            ],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "500kB",
+                  "maximumError": "1MB"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "4kB",
+                  "maximumError": "8kB"
+                }
+              ],
+              "outputHashing": "all",
+              "baseHref": "https://railsstudent.github.io/angular20-new-features/two-way-binding-dynamic-component-demo/"
+            },
+            "development": {
+              "optimization": false,
+              "extractLicenses": false,
+              "sourceMap": true
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "serve": {
+          "builder": "@angular/build:dev-server",
+          "configurations": {
+            "production": {
+              "buildTarget": "TwoWayBindingDynamicComponentDemo:build:production"
+            },
+            "development": {
+              "buildTarget": "TwoWayBindingDynamicComponentDemo:build:development"
+            }
+          },
+          "defaultConfiguration": "development"
+        },
+        "extract-i18n": {
+          "builder": "@angular/build:extract-i18n"
+        },
+        "test": {
+          "builder": "@angular/build:karma",
+          "options": {
+            "polyfills": [
+              "zone.js",
+              "zone.js/testing"
+            ],
+            "tsConfig": "projects/two-way-binding-dynamic-component-demo/tsconfig.spec.json",
+            "inlineStyleLanguage": "scss",
+            "assets": [
+              {
+                "glob": "**/*",
+                "input": "projects/two-way-binding-dynamic-component-demo/public"
+              }
+            ],
+            "styles": [
+              "projects/two-way-binding-dynamic-component-demo/src/styles.scss"
+            ],
+            "scripts": []
+          }
+        }
+      }
     }
   }
 }

@@ -1,13 +1,11 @@
-import { InjectionToken, WritableSignal } from '@angular/core';
+import { InjectionToken } from '@angular/core';
+import { Observable } from 'rxjs';
 
-import { BehaviorSubject } from 'rxjs';
-
-export abstract class ErrorDialog {
-  abstract show: WritableSignal<boolean>;
-  abstract show$: BehaviorSubject<boolean>;
-  abstract setShow(show: boolean): void;
+export interface ErrorTracking {
+  addNumErrors(): void;
+  getErrorCount$: Observable<number>;
 }
 
-export const ERROR_DIALOG_TOKEN = new InjectionToken<ErrorDialog>(
-  'ERROR_DIALOG_TOKEN'
+export const ERROR_TRACKING_TOKEN = new InjectionToken<ErrorTracking>(
+  'ERROR_TRACKING_TOKEN'
 );

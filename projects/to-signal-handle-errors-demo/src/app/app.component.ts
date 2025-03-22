@@ -15,6 +15,7 @@ import { navLinks } from './app.routes';
         <li><a [href]="pr" target="_blank">{{ pr }}</a></li>
       }
     </ol>
+    <h3>The demos throw error when button clicks increase the total to 5.</h3>
     <app-navbar [navLinks]="navLinks" />
     <router-outlet />
   `,

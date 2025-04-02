@@ -1,0 +1,31 @@
+<div>
+  <h1>{{ `${version} - ${name}` }}</h1>
+  <h2>{{ description }}</h2>
+  <h3>PR:</h3>
+  <ul>
+    @for (pr of prs; track pr) {
+      <li><a [href]="pr" target="_blank">{{ pr }}</a></li>
+    }
+  </ul>
+  <div>
+    <p>Programming Jokes:</p>
+    <div>
+      <button (click)="generateJoke()">Random joke</button>
+      <span>{{ `Number of clicks: ${numClicked()}`}}</span>
+    </div>
+    @if (jokeResource.hasValue()) {
+      @let value = jokeResource.value();
+      <p><label>Id: </label><span>{{ value.id }}</span></p>
+      <p><label>Category: </label><span>{{ value.category }}</span></p>
+      <p><label>Joke: </label><span>{{ value.joke }}</span></p>
+    }
+    <hr />
+
+    <p>Fresh Programming Joke with timestamp:</p>
+    @let value = jokeAudit();
+    <p><label>Id: </label><span>{{ value.id }}</span></p>
+    <p><label>Category: </label><span>{{ value.category }}</span></p>
+    <p><label>Joke: </label><span>{{ value.joke }}</span></p>
+    <p><label>New Joke #: </label><span>{{ value.numUpdates }}</span></p>
+  </div>
+</div>

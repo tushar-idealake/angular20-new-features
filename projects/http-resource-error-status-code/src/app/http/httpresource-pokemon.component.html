@@ -1,0 +1,20 @@
+<div>  
+  <button (click)="setUrl()">
+    <ng-content>Show Http Status Code</ng-content>
+  </button>
+  <p>{{ `Url: ${data()}` }}</p>
+  <p>Status Code: {{ statusCode() ? statusCode() : '' }}</p> 
+  @if (pokemonResourceRef.isLoading()) {
+    <p>Loading...</p>
+  } @else if (error()) {
+    <p>Error: {{ error()?.message }}</p>
+  } @else if (result()) {
+    <p>
+    Pikachu:
+    {{ result()?.id }}, {{ result()?.name }}, {{ result()?.weight }}, {{ result()?.height }}
+    </p>
+  }
+  @if (contentType()) {
+    <p>Content Type: {{ contentType() ? contentType(): '' }}</p>  
+  }
+</div>

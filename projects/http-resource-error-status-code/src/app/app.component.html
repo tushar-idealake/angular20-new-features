@@ -1,0 +1,13 @@
+<div>
+  <h1>{{ `${version} - ${name}` }}</h1>
+  <h2>{{ description }}</h2>
+  <h3>PR:</h3>
+  <ul>
+    @for (pr of prs; track pr) {
+      <li><a [href]="pr" target="_blank">{{ pr }}</a></li>
+    }
+  </ul>
+
+  <app-resource-pokemon />
+  <hr />
+</div>

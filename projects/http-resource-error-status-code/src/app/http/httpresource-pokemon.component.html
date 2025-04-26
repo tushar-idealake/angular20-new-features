@@ -8,13 +8,21 @@
     <p>Loading...</p>
   } @else if (error()) {
     <p>Error: {{ error()?.message }}</p>
-  } @else if (result()) {
+  } @else if (value()) {
     <p>
     Pikachu:
-    {{ result()?.id }}, {{ result()?.name }}, {{ result()?.weight }}, {{ result()?.height }}
+    {{ value()?.id }}, {{ value()?.name }}, {{ value()?.weight }}, {{ value()?.height }}
     </p>
   }
-  @if (contentType()) {
-    <p>Content Type: {{ contentType() ? contentType(): '' }}</p>  
+
+  @if (this.headers()) {
+    <p style="text-decoration: underline;">Headers</p>
+    @let keys = headers()?.keys() || [];
+    {{ keys.length }}
+    <ol>
+    @for (key of keys; track key) {
+      <li>{{ `headers["${key}"] = ${headers()?.get(key)}` }}</li>
+    }
+    </ol>
   }
 </div>

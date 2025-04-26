@@ -1,17 +1,10 @@
-import { ChangeDetectionStrategy, Component, computed, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
 import { httpResource } from '@angular/common/http';
 import { makeResourceRefStatus } from './utils/resource-ref.util';
-import { z } from 'zod';
+import { pokemonSchema } from './schemas/pokemon.schema';
 
 const PIKACHU_URL = 'https://pokeapi.co/api/v2/pokemon/pikachu';
 const ANGULAR_URL = 'https://pokeapi.co/api/v2/pokemon/angular';
-
-const pokemonSchema = z.object({
-  id: z.number(),
-  name: z.string(),
-  weight: z.number(),
-  height: z.number(),
-});
 
 @Component({
   selector: 'app-resource-pokemon',
@@ -43,16 +36,5 @@ export class HttpResourcePokemonComponent {
   error = this.resourceRefStatus.error;
   statusCode = this.resourceRefStatus.statusCode;
   headers = this.resourceRefStatus.headers;
-
-  contentType = computed(() => {
-    if (this.headers()?.has('content-type')) {
-      return this.headers()?.get('content-type') as string;
-    }
-    return undefined;
-  });
-
-  result = computed(() => {
-    return this.pokemonResourceRef.hasValue() ? 
-      this.pokemonResourceRef.value() : undefined;
-  });
+  value = this.resourceRefStatus.value;
 }

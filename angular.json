@@ -400,7 +400,6 @@
             "index": "projects/two-way-binding-dynamic-component-demo/src/index.html",
             "browser": "projects/two-way-binding-dynamic-component-demo/src/main.ts",
             "polyfills": [
-              "zone.js"
             ],
             "tsConfig": "projects/two-way-binding-dynamic-component-demo/tsconfig.app.json",
             "inlineStyleLanguage": "scss",
@@ -459,8 +458,6 @@
           "builder": "@angular/build:karma",
           "options": {
             "polyfills": [
-              "zone.js",
-              "zone.js/testing"
             ],
             "tsConfig": "projects/two-way-binding-dynamic-component-demo/tsconfig.spec.json",
             "inlineStyleLanguage": "scss",
@@ -499,7 +496,6 @@
             "index": "projects/to-signal-handle-errors-demo/src/index.html",
             "browser": "projects/to-signal-handle-errors-demo/src/main.ts",
             "polyfills": [
-              "zone.js"
             ],
             "tsConfig": "projects/to-signal-handle-errors-demo/tsconfig.app.json",
             "inlineStyleLanguage": "scss",
@@ -558,8 +554,6 @@
           "builder": "@angular/build:karma",
           "options": {
             "polyfills": [
-              "zone.js",
-              "zone.js/testing"
             ],
             "tsConfig": "projects/to-signal-handle-errors-demo/tsconfig.spec.json",
             "inlineStyleLanguage": "scss",
@@ -594,7 +588,6 @@
             "index": "projects/http-resource-demo/src/index.html",
             "browser": "projects/http-resource-demo/src/main.ts",
             "polyfills": [
-              "zone.js"
             ],
             "tsConfig": "projects/http-resource-demo/tsconfig.app.json",
             "inlineStyleLanguage": "scss",
@@ -651,8 +644,6 @@
           "builder": "@angular/build:karma",
           "options": {
             "polyfills": [
-              "zone.js",
-              "zone.js/testing"
             ],
             "tsConfig": "projects/http-resource-demo/tsconfig.spec.json",
             "inlineStyleLanguage": "scss",
@@ -685,9 +676,7 @@
           "options": {
             "index": "projects/http-resource-error-status-code/src/index.html",
             "browser": "projects/http-resource-error-status-code/src/main.ts",
-            "polyfills": [
-              "zone.js"
-            ],
+            "polyfills": [],
             "tsConfig": "projects/http-resource-error-status-code/tsconfig.app.json",
             "inlineStyleLanguage": "scss",
             "assets": [
@@ -742,10 +731,7 @@
         "test": {
           "builder": "@angular/build:karma",
           "options": {
-            "polyfills": [
-              "zone.js",
-              "zone.js/testing"
-            ],
+            "polyfills": [],
             "tsConfig": "projects/http-resource-error-status-code/tsconfig.spec.json",
             "inlineStyleLanguage": "scss",
             "assets": [

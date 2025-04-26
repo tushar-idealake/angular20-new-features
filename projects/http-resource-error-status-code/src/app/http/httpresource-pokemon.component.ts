@@ -1,10 +1,11 @@
-import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
 import { httpResource } from '@angular/common/http';
-import { makeResourceRefStatus } from './utils/resource-ref.util';
+import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
 import { pokemonSchema } from './schemas/pokemon.schema';
+import { makeResourceRefStatus } from './utils/resource-ref.util';
 
-const PIKACHU_URL = 'https://pokeapi.co/api/v2/pokemon/pikachu';
-const ANGULAR_URL = 'https://pokeapi.co/api/v2/pokemon/angular';
+const BASE_URL = 'https://pokeapi.co/api/v2/pokemon';
+const PIKACHU_URL = `${BASE_URL}/pikachu`;
+const ANGULAR_URL = `${BASE_URL}/angular`;
 
 @Component({
   selector: 'app-resource-pokemon',

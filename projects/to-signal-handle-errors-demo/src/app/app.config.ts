@@ -1,7 +1,7 @@
 import { provideHttpClient } from '@angular/common/http';
 import {
   ErrorHandler,
-  provideExperimentalZonelessChangeDetection
+  provideZonelessChangeDetection
 } from '@angular/core';
 import { provideRouter, withComponentInputBinding } from '@angular/router';
 import { routes } from './app.routes';
@@ -13,7 +13,7 @@ import { GlobalErrorHandler } from './errors/global-error-handler';
 export const appConfig = {
   providers: [
     provideHttpClient(),
-    provideExperimentalZonelessChangeDetection(),
+    provideZonelessChangeDetection(),
     provideRouter(routes, withComponentInputBinding()),
     {
       provide: ErrorHandler,

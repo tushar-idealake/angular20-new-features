@@ -9,6 +9,6 @@ export function makeResourceRefStatus(resourceRef: HttpResourceRef<Pokemon | und
     ),
     statusCode: computed(() => resourceRef.statusCode() ? resourceRef.statusCode() : undefined),
     headers: computed(() => resourceRef.headers() ? resourceRef.headers() : undefined),
-    value: computed(() => resourceRef.value() ? resourceRef.value() : undefined)
+    value: computed(() => resourceRef.hasValue() ? resourceRef.value() : undefined)
   }
 }

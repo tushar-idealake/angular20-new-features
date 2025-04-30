@@ -30,6 +30,12 @@
     },
     {
       "path": "projects/http-resource-error-status-code/tsconfig.spec.json"
+    },
+    {
+      "path": "./projects/in-operator-on-template-demo/tsconfig.app.json"
+    },
+    {
+      "path": "./projects/in-operator-on-template-demo/tsconfig.spec.json"
     }
   ]
 }

@@ -746,6 +746,95 @@
           }
         }
       }
+    },
+    "inOperatorOnTemplateDemo": {
+      "projectType": "application",
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "scss"
+        }
+      },
+      "root": "projects/in-operator-on-template-demo",
+      "sourceRoot": "projects/in-operator-on-template-demo/src",
+      "prefix": "app",
+      "architect": {
+        "build": {
+          "builder": "@angular/build:application",
+          "options": {
+            "index": "projects/in-operator-on-template-demo/src/index.html",
+            "browser": "projects/in-operator-on-template-demo/src/main.ts",
+            "polyfills": [
+            ],
+            "tsConfig": "projects/in-operator-on-template-demo/tsconfig.app.json",
+            "inlineStyleLanguage": "scss",
+            "assets": [
+              {
+                "glob": "**/*",
+                "input": "projects/in-operator-on-template-demo/public"
+              }
+            ],
+            "styles": [
+              "projects/in-operator-on-template-demo/src/styles.scss"
+            ]
+          },
+          "configurations": {
+            "production": {
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "500kB",
+                  "maximumError": "1MB"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "4kB",
+                  "maximumError": "8kB"
+                }
+              ],
+              "outputHashing": "all"
+            },
+            "development": {
+              "optimization": false,
+              "extractLicenses": false,
+              "sourceMap": true
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "serve": {
+          "builder": "@angular/build:dev-server",
+          "configurations": {
+            "production": {
+              "buildTarget": "inOperatorOnTemplateDemo:build:production"
+            },
+            "development": {
+              "buildTarget": "inOperatorOnTemplateDemo:build:development"
+            }
+          },
+          "defaultConfiguration": "development"
+        },
+        "extract-i18n": {
+          "builder": "@angular/build:extract-i18n"
+        },
+        "test": {
+          "builder": "@angular/build:karma",
+          "options": {
+            "polyfills": [
+            ],
+            "tsConfig": "projects/in-operator-on-template-demo/tsconfig.spec.json",
+            "inlineStyleLanguage": "scss",
+            "assets": [
+              {
+                "glob": "**/*",
+                "input": "projects/in-operator-on-template-demo/public"
+              }
+            ],
+            "styles": [
+              "projects/in-operator-on-template-demo/src/styles.scss"
+            ]
+          }
+        }
+      }
     }
   },
   "schematics": {

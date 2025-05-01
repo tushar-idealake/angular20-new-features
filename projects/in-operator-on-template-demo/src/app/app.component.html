@@ -1,1 +1,39 @@
-<p>app works!</p>
+<div>
+    <h1>{{ `${version} - ${name}` }}</h1>
+    <h2>{{ description }}</h2>
+    <h3>PR:</h3>
+    <ul>
+      @for (pr of prs; track pr) {
+        <li><a [href]="pr" target="_blank">{{ pr }}</a></li>
+      }
+    </ul>
+    
+    @for (animal of animals; track animal) {
+        @let properties = ['swim', 'noise', 'run', 'jump'];
+        <h3>In keyword in Angular expression</h3>
+        @for (property of properties; track property) {
+          <p>{{ property in  animal ? `${property} in animal` : `${property} not in animal` }}</p>
+        }
+        <h3>In keyword in new control-flow and Class Binidng</h3>
+        @let canSwim = 'swim' in animal;
+        @if (canSwim) {
+          <p [class.swim]="canSwim">{{ `The animal swims in ${animal.swim}.` }}</p>
+        }
+
+        @let canNoise = 'noise' in animal;
+        @if (canNoise) {
+          <p [class.noise]="canNoise">{{ `The animal ${animal.noise}.` }}</p>
+        }
+
+        @let canRun = 'run' in animal;
+        @if (canRun) {
+          <p [class.run]="canRun">{{ `The animal runs in ${animal.run}.` }}</p>
+        }
+
+        @let canJump = 'jump' in animal;
+        @if (canJump) {
+          <p [class.jump]="canJump">{{ `The animal jumps in ${animal.jump}.` }}</p>
+        }
+        <hr />
+    }
+</div>

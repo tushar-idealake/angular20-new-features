@@ -585,6 +585,10 @@
         "build": {
           "builder": "@angular/build:application",
           "options": {
+            "outputPath": {
+              "base": "dist/http-resource-demo",
+              "browser": ""
+            },
             "index": "projects/http-resource-demo/src/index.html",
             "browser": "projects/http-resource-demo/src/main.ts",
             "polyfills": [
@@ -674,6 +678,10 @@
         "build": {
           "builder": "@angular/build:application",
           "options": {
+            "outputPath": {
+              "base": "dist/http-resource-error-status-code",
+              "browser": ""
+            },
             "index": "projects/http-resource-error-status-code/src/index.html",
             "browser": "projects/http-resource-error-status-code/src/main.ts",
             "polyfills": [],
@@ -761,6 +769,10 @@
         "build": {
           "builder": "@angular/build:application",
           "options": {
+            "outputPath": {
+              "base": "dist/in-operator-on-template-demo",
+              "browser": ""
+            },
             "index": "projects/in-operator-on-template-demo/src/index.html",
             "browser": "projects/in-operator-on-template-demo/src/main.ts",
             "polyfills": [

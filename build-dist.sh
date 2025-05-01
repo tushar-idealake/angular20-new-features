@@ -22,13 +22,16 @@ touch "./dist/$token_dir/.nojekyll"
 git add dist
 git commit -m "chore: deploy to github page"
 
+git push -f origin chore/deploy:chore/deploy
+
+# Check
 # Split the current 'dist' directory into a local 'gh-pages' branch
-git subtree split --prefix dist -b gh-pages
+# git subtree split --prefix dist -b gh-pages
 
 # Force-push the local gh-pages branch to overwrite the remote gh-pages branch
-git push -f origin gh-pages:gh-pages
+# git push -f origin gh-pages:gh-pages
 
 # Delete the temporary local branch
-git branch -D gh-pages
+# git branch -D gh-pages
 
 echo 'build project finishes'

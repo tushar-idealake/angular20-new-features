@@ -1,11 +1,18 @@
 <div class="page-grid">
     <header>
         <p>{{ `${version} - ${name}` }}</p>
+        <div class="links">
+            <a [routerLink]="['/pikachu']">Pikachu</a>
+            <a [routerLink]="['/bulbasaur']">Bulbasaur</a>
+            <a [routerLink]="['/pidgeot']">Pidgeot</a>
+            <a [routerLink]="['/jigglypuff']">Jigglypuff</a>
+            <a [routerLink]="['/meowth']">Meowth</a>
+        </div>
     </header>
     <div class="router-content">
         <router-outlet />
     </div>
     <footer>
-        Github name: @railsstudent
+        Github name: &#64;railsstudent
     </footer>
 </div>

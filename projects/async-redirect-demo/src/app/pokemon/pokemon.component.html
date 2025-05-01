@@ -1,0 +1,23 @@
+@let p = pokemon();
+@if (p) {
+    <p>{{ `ID: ${p.id}` }}</p>
+    <p>{{ `Name: ${p.name}` }}</p>
+    <p>{{ `Weight: ${p.weight}` }}</p>
+    <p>{{ `Height: ${p.height}` }}</p>
+    <div>
+        <p>Sprites:</p>
+        @for (sprite of p.sprites; track sprite) {
+            <img alt="Pokemon image" [src]="sprite" />
+        } @empty {
+            <li>No sprite available</li>
+        }
+    </div>
+    <p>{{ `${p.cries.length} ${p.cries.length > 1 ? 'cries' : 'cry'}:` }}</p>
+    <ol>
+        @for (cry of p.cries; track cry) {
+            <audio controls [src]="cry"></audio>
+        } @empty {
+            <li>No moves available</li>
+        }
+    </ol>
+}

@@ -19,3 +19,11 @@ footer {
     padding: 1rem 0;
     background-color: darkgray
 }
+
+.links {
+    display: flex;
+}
+
+.links > a {
+    flex: 1 1 auto;
+}

@@ -1,0 +1,21 @@
+.page-grid {
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+    min-height: calc(100vh - 2rem);
+}
+
+header {
+    grid-row: 1 / 2;
+    padding: 1rem 0;
+    background-color: darkgray
+}
+
+.router-content {
+    grid-row: 2 / 3;
+}
+
+footer {
+    grid-row: 3 / 4;
+    padding: 1rem 0;
+    background-color: darkgray
+}

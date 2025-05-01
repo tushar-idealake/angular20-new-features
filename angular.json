@@ -850,6 +850,96 @@
           }
         }
       }
+    },
+    "asyncRedirectDemo": {
+      "projectType": "application",
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "scss"
+        }
+      },
+      "root": "projects/async-redirect-demo",
+      "sourceRoot": "projects/async-redirect-demo/src",
+      "prefix": "app",
+      "architect": {
+        "build": {
+          "builder": "@angular/build:application",
+          "options": {
+            "outputPath": {
+              "base": "dist/async-redirect-demo",
+              "browser": ""
+            },
+            "index": "projects/async-redirect-demo/src/index.html",
+            "browser": "projects/async-redirect-demo/src/main.ts",
+            "tsConfig": "projects/async-redirect-demo/tsconfig.app.json",
+            "inlineStyleLanguage": "scss",
+            "assets": [
+              {
+                "glob": "**/*",
+                "input": "projects/async-redirect-demo/public"
+              }
+            ],
+            "styles": [
+              "projects/async-redirect-demo/src/styles.scss"
+            ]
+          },
+          "configurations": {
+            "production": {
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "500kB",
+                  "maximumError": "1MB"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "4kB",
+                  "maximumError": "8kB"
+                }
+              ],
+              "outputHashing": "all",
+              "baseHref": "https://railsstudent.github.io/angular20-new-features/async-redirect-demo/"
+            },
+            "development": {
+              "optimization": false,
+              "extractLicenses": false,
+              "sourceMap": true
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "serve": {
+          "builder": "@angular/build:dev-server",
+          "configurations": {
+            "production": {
+              "buildTarget": "asyncRedirectDemo:build:production"
+            },
+            "development": {
+              "buildTarget": "asyncRedirectDemo:build:development"
+            }
+          },
+          "defaultConfiguration": "development"
+        },
+        "extract-i18n": {
+          "builder": "@angular/build:extract-i18n"
+        },
+        "test": {
+          "builder": "@angular/build:karma",
+          "options": {
+            "tsConfig": "projects/async-redirect-demo/tsconfig.spec.json",
+            "inlineStyleLanguage": "scss",
+            "assets": [
+              {
+                "glob": "**/*",
+                "input": "projects/async-redirect-demo/public"
+              }
+            ],
+            "styles": [
+              "projects/async-redirect-demo/src/styles.scss"
+            ]
+          }
+        }
+      }
     }
   },
   "schematics": {

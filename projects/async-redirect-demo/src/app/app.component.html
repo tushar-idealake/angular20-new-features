@@ -2,11 +2,9 @@
     <header>
         <p>{{ `${version} - ${name}` }}</p>
         <div class="links">
-            <a [routerLink]="['/pikachu']">Pikachu</a>
-            <a [routerLink]="['/bulbasaur']">Bulbasaur</a>
-            <a [routerLink]="['/pidgeot']">Pidgeot</a>
-            <a [routerLink]="['/jigglypuff']">Jigglypuff</a>
-            <a [routerLink]="['/meowth']">Meowth</a>
+            @for (link of links; track link.path) {
+                <a [routerLink]="link.path">{{ link.label }}</a>
+            }
         </div>
     </header>
     <div class="router-content">

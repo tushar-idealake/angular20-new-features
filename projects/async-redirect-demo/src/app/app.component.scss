@@ -22,6 +22,7 @@ footer {
 
 .links {
     display: flex;
+    flex-wrap: wrap;
 }
 
 .links > a {

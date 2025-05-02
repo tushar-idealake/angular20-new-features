@@ -1,10 +1,11 @@
-import { Component, VERSION } from '@angular/core';
+import { ChangeDetectionStrategy, Component, VERSION } from '@angular/core';
 import { Cat, Dog, Fish } from './animal.type';
 
 @Component({
   selector: 'app-root',
   imports: [],
   templateUrl: './app.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AppComponent {
   version = VERSION.full;

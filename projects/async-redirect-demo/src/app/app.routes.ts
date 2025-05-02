@@ -3,12 +3,25 @@ import { inject } from '@angular/core';
 import { ActivatedRouteSnapshot, Routes } from '@angular/router';
 import { catchError, map, of } from 'rxjs';
 import { OriginPokemon, Pokemon } from './pokemon/types/pokemon.type';
+import { LINKS } from './app.link';
+
+const pokemonRoutes: Routes = LINKS.map(({ path, label: title }, i) => {
+    const route = `/pokemon/${path}`;
+    return {
+        path,
+        title,
+        redirectTo: () => i % 2 === 0 ? of(route) : Promise.resolve(route)
+    }
+});
+
+console.log('pokemonRoutes', pokemonRoutes);
 
 export const routes: Routes = [
     {
         path: 'home',
         loadComponent: () => import('./home/home.component'),
     },
+    ...pokemonRoutes,
     {
         path: 'pokemon/:id',
         resolve:{
@@ -22,10 +35,10 @@ export const routes: Routes = [
                                 id: data.id,
                                 height: data.height,
                                 weight: data.weight,
-                                cries: Object.keys(data.cries).map((key) => data.cries[key]),
                                 sprites: Object.keys(data.sprites)
                                     .map((key) => data.sprites[key])
-                                    .filter((sprite) => sprite !== null && typeof sprite === 'string')
+                                    .filter((sprite) => sprite !== null && typeof sprite === 'string'),
+                                types: data.types.map((type) => ({ slot: type.slot, type: type.type.name }))
                             }) as Pokemon
                         ),
                         catchError((e) => { 
@@ -40,26 +53,6 @@ export const routes: Routes = [
             }
         },
         loadComponent: () => import('./pokemon/pokemon.component'),
-    },
-    {
-        path: 'pikachu',
-        redirectTo: () => of('/pokemon/pikachu')
-    },
-    {
-        path: 'bulbasaur',
-        redirectTo: () => of('/pokemon/bulbasaur')
-    },
-    {
-        path: 'pidgeot',
-        redirectTo: () => Promise.resolve('/pokemon/pidgeot')
-    },
-    {
-        path: 'jigglypuff',
-        redirectTo: () => Promise.resolve('/pokemon/jigglypuff')
-    },
-    {
-        path: 'meowth',
-        redirectTo: () => Promise.resolve('/pokemon/meowth')
     },
     {
         path: '',

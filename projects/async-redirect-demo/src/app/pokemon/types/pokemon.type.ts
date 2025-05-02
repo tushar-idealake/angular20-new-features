@@ -3,11 +3,17 @@ export type OriginPokemon = {
     name: string;
     weight: number;
     height: number;
-    cries: Record<string, string>;
     sprites: Record<string, string | null | Record<string, any>>;
+    types: {
+        slot: number;
+        type: {
+            name: string;
+            url: string;
+        }
+    }[];
 }
 
 export type Pokemon = Pick<OriginPokemon, 'id' | 'name' | 'weight' | 'height'> & {
-    cries: string[];
     sprites: string[];
+    types: { slot: number, type: string }[];
 }

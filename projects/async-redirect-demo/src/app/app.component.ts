@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component, VERSION } from '@angular/core';
 import { RouterLink, RouterOutlet } from '@angular/router';
+import { LINKS } from './app.link';
 
 @Component({
   selector: 'app-root',
@@ -11,4 +12,5 @@ import { RouterLink, RouterOutlet } from '@angular/router';
 export class AppComponent {
   version = VERSION.full;
   name = 'Asynchronous Redirect Demo';
+  links = LINKS;
 }

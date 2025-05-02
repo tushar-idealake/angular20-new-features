@@ -9,15 +9,15 @@
         @for (sprite of p.sprites; track sprite) {
             <img alt="Pokemon image" [src]="sprite" />
         } @empty {
-            <li>No sprite available</li>
+            <p>No sprite available</p>
         }
     </div>
-    <p>{{ `${p.cries.length} ${p.cries.length > 1 ? 'cries' : 'cry'}:` }}</p>
     <ol>
-        @for (cry of p.cries; track cry) {
-            <audio controls [src]="cry"></audio>
+        <p>Types:</p>
+        @for (pokemonType of p.types; track pokemonType.slot) {
+            <li>{{ pokemonType.type }}</li>
         } @empty {
-            <li>No moves available</li>
+            <li>No type available</li>
         }
     </ol>
 }

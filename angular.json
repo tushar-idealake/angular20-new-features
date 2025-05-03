@@ -955,6 +955,10 @@
         "build": {
           "builder": "@angular/build:application",
           "options": {
+            "outputPath": {
+              "base": "dist/provide-browser-global-error-listeners-demo",
+              "browser": ""
+            },
             "index": "projects/provide-browser-global-error-listeners-demo/src/index.html",
             "browser": "projects/provide-browser-global-error-listeners-demo/src/main.ts",
             "tsConfig": "projects/provide-browser-global-error-listeners-demo/tsconfig.app.json",
@@ -983,7 +987,8 @@
                   "maximumError": "8kB"
                 }
               ],
-              "outputHashing": "all"
+              "outputHashing": "all",
+              "baseHref": "https://railsstudent.github.io/angular20-new-features/provide-browser-global-error-listeners-demo/"
             },
             "development": {
               "optimization": false,

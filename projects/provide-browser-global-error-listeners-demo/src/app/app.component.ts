@@ -44,7 +44,7 @@ export class AppComponent {
     new Promise<number>((resolve, reject) => {
       const value = this.query2();
       if (value < 0) {
-        reject(`Cannot calculate the square root of a negative number: ${value}`)
+        reject(new SquareRootError(value));
       }
       resolve(value);
     }).then((value) => this.neutralNumber2.set(value));

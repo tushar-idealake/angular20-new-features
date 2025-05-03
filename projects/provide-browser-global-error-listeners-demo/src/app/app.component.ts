@@ -25,10 +25,28 @@ export class AppComponent {
   );
 
   calculateSquareRoot() {
-    if (this.query() < 0) {
-      throw new SquareRootError(this.query())
+    const value = this.query();
+    if (value < 0) {
+      throw new SquareRootError(value)
     }
 
-    this.neutralNumber.set(this.query());
+    this.neutralNumber.set(value);
+  }
+
+  query2 = signal(0);
+  neutralNumber2 = signal<number | undefined>(undefined);
+  squareRoot2 = linkedSignal(() => 
+    typeof this.neutralNumber2() !== 'undefined' ?
+      Math.sqrt(this.neutralNumber2() as number) : undefined
+  );
+  
+  calculateSquareRoot2() {
+    new Promise<number>((resolve, reject) => {
+      const value = this.query2();
+      if (value < 0) {
+        reject(`Cannot calculate the square root of a negative number: ${value}`)
+      }
+      resolve(value);
+    }).then((value) => this.neutralNumber2.set(value));
   }
 }

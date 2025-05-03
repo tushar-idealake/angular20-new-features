@@ -18,6 +18,17 @@
                 <p>Square root of {{ neutralNumber() }} is {{ squareRoot() }}</p>
             }    
         </div>
+
+        <div>
+            <label>
+                <span>Find square root of a number:</span>
+                <input type="number" [(ngModel)]="query2" />
+            </label>
+            <button (click)="calculateSquareRoot2()">Calculate</button>
+            @if (typeof squareRoot2() !== 'undefined') {
+                <p>Square root of {{ neutralNumber2() }} is {{ squareRoot2() }}</p>
+            }    
+        </div>
     </div>
 </div>
     

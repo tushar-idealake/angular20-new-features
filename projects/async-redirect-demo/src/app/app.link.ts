@@ -1,3 +1,6 @@
+import { Routes } from '@angular/router';
+import { of } from 'rxjs';
+
 export const LINKS = [
     {
         path: 'pikachu',
@@ -24,3 +27,12 @@ export const LINKS = [
         label: 'Ponyta'
     }
 ];
+
+export const pokemonRoutes: Routes = LINKS.map(({ path, label: title }, i) => {
+    const route = `/pokemon/${path}`;
+    return {
+        path,
+        title,
+        redirectTo: () => i % 2 === 0 ? of(route) : Promise.resolve(route)
+    }
+});

@@ -1,0 +1,8 @@
+.links {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.links > a {
+    flex: 1 1 auto;
+}

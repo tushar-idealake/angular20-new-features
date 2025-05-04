@@ -1,16 +1,13 @@
 import { ChangeDetectionStrategy, Component, VERSION } from '@angular/core';
-import { RouterLink, RouterOutlet } from '@angular/router';
+import { RouterOutlet } from '@angular/router';
 import { LINKS } from './app.link';
+import { NavBarComponent } from './nav-bar/nav-bar.component';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, RouterLink],
+  imports: [RouterOutlet, NavBarComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class AppComponent {
-  version = VERSION.full;
-  name = 'Asynchronous Redirect Demo';
-  links = LINKS;
-}
+export class AppComponent {}

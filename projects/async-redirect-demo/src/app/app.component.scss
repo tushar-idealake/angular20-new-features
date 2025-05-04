@@ -4,7 +4,7 @@
     min-height: calc(100vh - 2rem);
 }
 
-header {
+header, .navbar {
     grid-row: 1 / 2;
     padding: 1rem 0;
     background-color: darkgray

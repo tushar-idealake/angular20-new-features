@@ -6,11 +6,13 @@
     <p>{{ `Height: ${p.height}` }}</p>
     <div>
         <p>Sprites:</p>
+        <div class="images">
         @for (sprite of p.sprites; track sprite) {
             <img alt="Pokemon image" [src]="sprite" />
         } @empty {
             <p>No sprite available</p>
         }
+        </div>
     </div>
     <ol>
         <p>Types:</p>

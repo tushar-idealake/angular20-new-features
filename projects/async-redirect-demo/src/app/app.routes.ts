@@ -1,9 +1,8 @@
-import { HttpClient } from '@angular/common/http';
 import { inject } from '@angular/core';
 import { ActivatedRouteSnapshot, Routes } from '@angular/router';
-import { catchError, map, of } from 'rxjs';
-import { OriginPokemon, Pokemon } from './pokemon/types/pokemon.type';
+import { of } from 'rxjs';
 import { LINKS } from './app.link';
+import { PokemonService } from './pokemon/services/pokemon.service';
 
 const pokemonRoutes: Routes = LINKS.map(({ path, label: title }, i) => {
     const route = `/pokemon/${path}`;
@@ -13,8 +12,6 @@ const pokemonRoutes: Routes = LINKS.map(({ path, label: title }, i) => {
         redirectTo: () => i % 2 === 0 ? of(route) : Promise.resolve(route)
     }
 });
-
-console.log('pokemonRoutes', pokemonRoutes);
 
 export const routes: Routes = [
     {
@@ -26,30 +23,9 @@ export const routes: Routes = [
         path: 'pokemon/:id',
         resolve:{
             pokemon: (route: ActivatedRouteSnapshot) => { 
+                const service = inject(PokemonService);
                 const id = route.params['id'];
-                const httpClient = inject(HttpClient);
-                return httpClient.get<OriginPokemon>(`https://pokeapi.co/api/v2/pokemon/${id}`)
-                    .pipe(
-                        map((data) => ({                             
-                                name: data.name,
-                                id: data.id,
-                                height: data.height,
-                                weight: data.weight,
-                                sprites: Object.keys(data.sprites)
-                                    .map((key) => data.sprites[key])
-                                    .filter((sprite) => sprite !== null && typeof sprite === 'string'),
-                                types: data.types.map((type) => ({ slot: type.slot, type: type.type.name }))
-                            }) as Pokemon
-                        ),
-                        catchError((e) => { 
-                            if (e instanceof Error) {
-                                console.error(e.message);
-                            } else {
-                                console.error(e);
-                            }
-                            return of(undefined);
-                        })
-                    );
+                return service.retrieve(id);
             }
         },
         loadComponent: () => import('./pokemon/pokemon.component'),

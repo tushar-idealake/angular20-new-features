@@ -46,7 +46,7 @@ import { AppLabelColorDirective } from './star-war/star-war-label.directive';
 })
 export class AppComponent {
   readonly version = VERSION.full;
-  readonly name = 'Support bindings and directives in dyanmic component';
+  readonly name = 'Support bindings and directives in dynamic component';
   
   vcr = viewChild.required('vcr', { read: ViewContainerRef });
   componentRefs = [] as ComponentRef<any>[];

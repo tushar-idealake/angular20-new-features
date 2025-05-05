@@ -13,14 +13,14 @@ import { switchMap } from 'rxjs';
         @if (isSith()) {
           <p>A Sith, he is evil.</p>
         }         
-        <p><span>Name: </span>{{ person.name }}</p>
-        <p><span>Height: </span>{{ person.height }}</p>
-        <p><span>Mass:</span> {{ person.mass }}</p>
-        <p><span>Hair Color:</span> {{ person.hair_color }}</p>
-        <p><span>Skin Color:</span> {{ person.skin_color }}</p>
-        <p><span>Eye Color:</span> {{ person.eye_color }}</p>
-        <p><span>Gender:</span> {{ person.gender }}</p>
-        <button (click)="alertStarWars.emit(person.name)">Alert parent</button>
+        <p><span>Name: </span>{{ person?.result?.properties.name }}</p>
+        <p><span>Height: </span>{{ person?.result?.properties.height }}</p>
+        <p><span>Mass:</span> {{ person?.result?.properties.mass }}</p>
+        <p><span>Hair Color:</span> {{ person?.result?.properties.hair_color }}</p>
+        <p><span>Skin Color:</span> {{ person?.result?.properties.skin_color }}</p>
+        <p><span>Eye Color:</span> {{ person?.result?.properties.eye_color }}</p>
+        <p><span>Gender:</span> {{ person?.result?.properties.gender }}</p>
+        <button (click)="alertStarWars.emit(person?.result?.properties.name)">Alert parent</button>
       } @else {
         <p>No info</p>
       }

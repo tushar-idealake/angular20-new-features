@@ -13,7 +13,7 @@ export const routes: Routes = [
         path: 'pokemon/:id',
         resolve:{
             pokemon: (route: ActivatedRouteSnapshot) => { 
-                const service = inject(PokemonService);
+                const service = inject(PokemonService); // service injected here dynamically
                 const id = route.params['id'];
                 return service.retrieve(id);
             }

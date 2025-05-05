@@ -1,5 +1,6 @@
 <header>
-    <p>{{ `${version} - ${name}` }}</p>
+    <h1>{{ `${version} - ${name}` }}</h1>
+    <br>
     <div class="links">
         @for (link of links; track link.path) {
             <a [routerLink]="link.path">{{ link.label }}</a>

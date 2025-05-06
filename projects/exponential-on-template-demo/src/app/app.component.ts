@@ -24,8 +24,8 @@ import { ChangeDetectionStrategy, Component, VERSION } from '@angular/core';
           </div>
           <div class="row">
             <p>Case 2: ** operator is right associative.</p>
-            <p>{{ a }} ** {{ b }} ** {{ c }} = {{ a ** b ** c }}</p>
-            <p>{{ a }} ** ({{ b }} ** {{ c }}) = {{ a ** (b ** c) }}</p>
+            <p>{{ a }} ** {{ b }} ** {{ c }} => {{a}}**{{b**c}} = {{ a ** b ** c }}
+            <p>{{ a }} ** ({{ b }} ** {{ c }}) => {{a}}**{{b**c}} = {{ a ** (b ** c) }}</p>
           </div>
           <div class="row">
             <p>Case 3: parentheses is required around uary operator when it is the base of the ** operator.</p>

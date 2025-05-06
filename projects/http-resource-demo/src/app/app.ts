@@ -23,7 +23,7 @@ export class App {
   this.category() ? 
   `https://v2.jokeapi.dev/joke/${this.category()}?blacklistFlags=nsfw,religious,political,racist,sexist,explicit&type=single&idRange=1-5`: undefined, {
     parse: jokeSchema.parse,
-    equal: (a, b) => a.id == b.id,
+    equal: (a, b) => a.id == b.id, // if equal then jokeAudit() does not compute need debugging
     defaultValue: {
       id: -1,
       error: false,

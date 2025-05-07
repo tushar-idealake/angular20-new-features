@@ -7,32 +7,36 @@
         <li><a [href]="pr" target="_blank">{{ pr }}</a></li>
       }
     </ul>
+    <!-- debugger -->
+    <p>using $any(this) | json for debugging</p>
+    <p>{{$any(this) | json}}</p> 
+    <br>
     
     @for (animal of animals; track animal) {
         @let properties = ['swim', 'noise', 'run', 'jump'];
         <h3>In keyword in Angular expression</h3>
         @for (property of properties; track property) {
-          <p>{{ property in  animal ? `${property} in animal` : `${property} not in animal` }}</p>
+          <p>{{ property in  animal ? `${property} in ${animal.name}` : `${property} not in ${animal.name}` }}</p>
         }
-        <h3>In keyword in new control-flow and Class Binidng</h3>
-        @let canSwim = 'swim' in animal;
+        <h3>In keyword in new control-flow and Class Binding</h3>
+        @let canSwim = 'swim' in animal; // accessing variable using let and using in to select 'swim' from currently iterated animals
         @if (canSwim) {
-          <p [class.swim]="canSwim">{{ `The animal swims in ${animal.swim}.` }}</p>
+          <p [class.swim]="canSwim">{{ `The ${animal.name} swims in ${animal.swim}.` }}</p>
         }
 
         @let canNoise = 'noise' in animal;
         @if (canNoise) {
-          <p [class.noise]="canNoise">{{ `The animal ${animal.noise}.` }}</p>
+          <p [class.noise]="canNoise">{{ `The ${animal.name} ${animal.noise}.` }}</p>
         }
 
         @let canRun = 'run' in animal;
         @if (canRun) {
-          <p [class.run]="canRun">{{ `The animal runs in ${animal.run}.` }}</p>
+          <p [class.run]="canRun">{{ `The ${animal.name} runs in ${animal.run}.` }}</p>
         }
 
         @let canJump = 'jump' in animal;
         @if (canJump) {
-          <p [class.jump]="canJump">{{ `The animal jumps in ${animal.jump}.` }}</p>
+          <p [class.jump]="canJump">{{ `The ${animal.name} jumps in ${animal.jump}.` }}</p>
         }
         <hr />
     }

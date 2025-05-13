@@ -45,6 +45,7 @@ export class AppComponent {
       const value = this.query2();
       if (value < 0) {
         reject(new SquareRootError(value));
+        //console.error(`Cannot calculate square root of ${value}`,'can we set Error name?');
       }
       resolve(value);
     }).then((value) => this.neutralNumber2.set(value));

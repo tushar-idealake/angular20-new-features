@@ -12,10 +12,16 @@ export class AppComponent {
   description = 'Tagged Template Literals Demo';
 
   name = signal('Mary');
-  greeting = signal('morning');
+  greeting = signal({id: 1, word:'morning', spanishWord:'buenos días'});
 
+  
   greet(strings: TemplateStringsArray, name: string, greeting: string) {
     console.log(strings);
     return `${strings[0]} ${name}${strings[1]} ${greeting}${strings[2]}`;
+  }
+
+  translate(strings: TemplateStringsArray, name: string, greeting: string, translatedgreeting: string) {
+    console.log(strings);
+    return `${strings[0]} ${name}${strings[1]} ${greeting}${strings[2]} ${translatedgreeting}${strings[3]}`;
   }
 }

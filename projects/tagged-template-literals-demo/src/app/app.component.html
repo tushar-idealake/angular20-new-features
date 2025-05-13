@@ -1,26 +1,35 @@
 <div>
   <h1>{{ `${version} - ${description}` }}</h1>
-    <div>
-      <p>PR:</p>
-      <ol style="margin-bottom: 1rem;">
-        <li><a href="https://github.com/angular/angular/pull/59947" target="_blank">
+  <div>
+    <p>PR:</p>
+    <ol style="margin-bottom: 1rem;">
+      <li><a href="https://github.com/angular/angular/pull/59947" target="_blank">
           https://github.com/angular/angular/pull/59947
         </a></li>
-      </ol>
-      <div>
-        <label for="greeting">Greeting: </label>
-        @let options = ['morning', 'afternoon', 'day', 'evening', 'to see you', 'day to you'];
-        <select [(ngModel)]="greeting" id="greeting" name="greeting">
-          @for (option of options; track option) {
-            <option [ngValue]="option">{{ option }}</option>
-          }
-        </select>
-      </div>
-      <p>
-        {{ greet`Hello ${name()}, Good ${greeting()}!` }}
-      </p>
-      <p>
-        {{ greet`Wait up, ${name()}. How do say ${greeting()} in Spanish?` }}
-      </p>
+    </ol>
+    <div>
+      <label for="greeting">Greeting: </label>
+      @let options = [{id:1, word:'morning', spanishWord: 'buenos días'}, {id:2, word:'afternoon', spanishWord: 'buenas
+      tardes'},
+      {id:3, word:'day', spanishWord: 'buen día'}, {id:4, word:'evening', spanishWord: 'buena tarde-noche'},
+      {id:5, word:'to see you', spanishWord: 'buena tarde-noche'}, {id:6, word:'day to you', spanishWord: 'buen día para
+      ti'}];
+      <select [(ngModel)]="greeting" id="greeting" name="greeting">
+        @for (option of options; track option) {
+        <option [ngValue]="option">{{ option.word }}
+        </option>
+        }
+      </select>
     </div>
+    <p>
+      {{ greet`Hello ${name()}, Good ${greeting().word}!` }}
+    </p>
+    <p>
+      {{ greet`Wait up, ${name()}. How do say ${greeting().word} in Spanish?` }}
+    </p>
+    <p>
+      {{ translate` Hi ${name()}, this is how you say Good ${greeting().word} =>
+      ${greeting().spanishWord} in Espanol` }}
+    </p>
+  </div>
 </div>

@@ -33,13 +33,13 @@ import { ERROR_TRACKING_TOKEN } from '../errors/error-token.constant';
 export default class DefaultErrorsComponent {
   #errorTracking = inject(ERROR_TRACKING_TOKEN);
   something = new BehaviorSubject(1);
-  debounce$ = this.something.pipe(debounceTime(300));
+  debounce$ = this.something.pipe(debounceTime(200));
 
-  myGuess = 5;
+  myGuess = 333;
 
   #hint$ = this.debounce$.pipe(
     filter((v) => Math.floor(v) === v),
-    filter((v) => v >= 1 && v <= 100),
+    filter((v) => v >= 1 && v <= 10000),
     scan((acc, v) => {
       if (v < acc.left || v > acc.right) {
         return acc;
@@ -60,7 +60,7 @@ export default class DefaultErrorsComponent {
       }
 
       return { ...acc, guess: v };
-    }, { left: 1, right: 100, guess: -1 }),
+    }, { left: 1, right: 10000, guess: -1 }),
     map(({ left, right, guess }) => {
       if (guess === this.myGuess) {
         throw new Error(
@@ -72,7 +72,7 @@ export default class DefaultErrorsComponent {
   );
 
   hint = toSignal(this.#hint$, {
-    initialValue: 'Guess an integer between 1 and 100'
+    initialValue: 'Guess an integer between 1 and 10000'
   });
 
   constructor() {

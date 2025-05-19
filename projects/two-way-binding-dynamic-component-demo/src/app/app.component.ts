@@ -23,7 +23,7 @@ import { FormsModule } from '@angular/forms';
     />
 
     <div>
-      <span>Two-way Bindings: {{ lastClicked()}}</span>
+      <p class="rebeccapurple">Two-way Bindings: <span>{{ lastClicked()}}</span></p>
     </div>
 
     <ng-template let-items="items" let-isSith="isSith"
